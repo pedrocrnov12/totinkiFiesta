@@ -170,28 +170,22 @@ $('document').ready(function(){
 			$('.message').fadeIn('slow');
 		});
 		
-		var i;
-
-		function msgLoop (i) {
-			$("p:nth-child("+i+")").fadeOut('slow').delay(800).promise().done(function(){
-			i=i+1;
-			$("p:nth-child("+i+")").fadeIn('slow').delay(1000);
-			if(i==50){
-				$("p:nth-child(49)").fadeOut('slow').promise().done(function () {
-					$('.cake').fadeIn('fast');
+		var i = 0;
+	
+		function msgLoop(i) {
+			$("p:nth-child("+i+")").fadeIn(2000).delay(2000).promise().done(function(){
+				$("p:nth-child("+i+")").fadeOut(2000).delay(500).promise().done(function(){
+					i++;
+					if(i < 5) {  // Cambié la condición para solo 3 párrafos
+						msgLoop(i);
+					} else {
+						$('.cake').fadeIn('fast');
+					}
 				});
-				
-			}
-			else{
-				msgLoop(i);
-			}			
-
-		});
-			// body...
+			});
 		}
-		
-		msgLoop(0);
-		
+	
+		msgLoop(i);
 	});
 });
 
